@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/Mprfle"
+            android:icon="@drawable/face"
+            android:title="My Profile"></item>
+        <item
+            android:id="@+id/AdChld"
+            android:icon="@drawable/add"
+            android:title="Add Child"></item>
+        <item
+            android:id="@+id/ChldLoc"
+            android:icon="@drawable/ic_baseline_location_on_24"
+            android:title="Child Location"></item>
+        <item
+            android:id="@+id/Blck"
+            android:icon="@drawable/app_blocking"
+            android:title="Blocking"></item>
+
+        <item
+            android:id="@+id/Logout"
+            android:icon="@drawable/logout"
+            android:title="Logout"></item>
+
+    </group>
+
+    <item android:title="Communicate">
+
+        <menu>
+            <item
+                android:id="@+id/ConUs"
+                android:icon="@drawable/support"
+                android:title="Contact Us"></item>
+
+            <item
+                android:id="@+id/AbUs"
+                android:icon="@drawable/about"
+                android:title="About Us"></item>
+
+        </menu>
+
+
+    </item>
+
+
+</menu>

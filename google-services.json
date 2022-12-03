@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "152003998193",
+    "firebase_url": "https://sentinel-9991a-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "sentinel-9991a",
+    "storage_bucket": "sentinel-9991a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152003998193:android:cf7686a12366fbd3f91450",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152003998193-oull9hv90fdt1e9kibinvhtepcmspm4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvwXE1kLC0Cf2hfGsomAQATAcI66ollNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152003998193-oull9hv90fdt1e9kibinvhtepcmspm4a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

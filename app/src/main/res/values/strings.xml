@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="sentinel">Sentinel</string>
+    <string name="parent_control_app">Parental Control Application</string>
+    <string name="navigation_draw_open">Open Vavigation Drawer</string>
+    <string name="navigation_draw_close">Close Navigation Drawer</string>
+    <string name="confirmreg">Please review your inputted data</string>
+</resources>
