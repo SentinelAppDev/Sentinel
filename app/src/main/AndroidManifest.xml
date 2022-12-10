@@ -48,7 +48,11 @@
 
         </activity>
         <activity
-            android:name=".pin"
+            android:name=".newpin"
+            android:hardwareAccelerated="true"
+            android:exported="false" />
+        <activity
+            android:name=".enterpin"
             android:hardwareAccelerated="true"
             android:exported="false" />
 

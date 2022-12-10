@@ -5,4 +5,9 @@
     <string name="navigation_draw_open">Open Vavigation Drawer</string>
     <string name="navigation_draw_close">Close Navigation Drawer</string>
     <string name="confirmreg">Please review your inputted data</string>
+    <string name="messagepinnew">Enter a 4 digit combination PIN</string>
+    <string name="messagepinnewconf">Please confirm your 4 digit combination PIN</string>
+    <string name="messagepinold">Enter your 4 digit combination PIN</string>
+    <string name="submit">Submit</string>
+    <string name="confirm">Confirm</string>
 </resources>

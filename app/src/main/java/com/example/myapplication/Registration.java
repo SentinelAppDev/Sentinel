@@ -205,6 +205,7 @@ public class Registration extends AppCompatActivity {
         User u = new User();
         u.setEmailaddress(email);
         u.setPhone(phone);
+        u.setPinstatus("new");
 
         String[] parts = email.split("@");
         databaseReference.child("Users").child(parts[0]).setValue(u)
@@ -219,6 +220,13 @@ public class Registration extends AppCompatActivity {
                     Toast.makeText(Registration.this, e.getMessage(), Toast.LENGTH_LONG).show();
 
                 });
+    }
+
+    public void onBackPressed(){
+
+        super.onBackPressed();
+        finish();
+
     }
 
     @Override

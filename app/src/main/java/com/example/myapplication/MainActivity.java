@@ -33,6 +33,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -48,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean monitoringConnectivity = false;
     private RelativeLayout layout;
     private FirebaseAuth auth;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    private String pinstatus = "";
+    private EditText mail, Password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +77,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         layout = findViewById(R.id.loginlayout);
 
-        final EditText mail = findViewById(R.id.Email);
-        final EditText Password= findViewById(R.id.Password);
+        FirebaseApp.initializeApp(MainActivity.this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference().child("Users");
+        mail = findViewById(R.id.Email);
+        Password= findViewById(R.id.Password);
         final MaterialButton loginBtn = findViewById(R.id.loginButton);
         final TextView Signupbtn = findViewById(R.id.SignupButton);
+
 
         Signupbtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,Registration.class)));
 
@@ -109,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 else {
-
+                    getPinStatus();
                     auth.signInWithEmailAndPassword(femail, fpass)
                             .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
 
@@ -118,9 +127,18 @@ public class MainActivity extends AppCompatActivity {
 
                                     if(task.isSuccessful()){
 
-                                        Intent intent = new Intent(MainActivity.this, Mainmenu.class);
-                                        startActivity(intent);
-                                        finish();
+                                        if(pinstatus.equals("new")){
+
+                                            Intent intent = new Intent(MainActivity.this, newpin.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                        else if (pinstatus.equals("old")){
+
+                                            Intent intent = new Intent(MainActivity.this, enterpin.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
                                     }
 
                                     else {
@@ -145,6 +163,31 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    private void getPinStatus(){
+
+        String email = mail.getText().toString().trim();
+        String[] part = email.split("@");
+        databaseReference.child(part[0]).child("pinstatus").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                pinstatus = snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void onBackPressed(){
+
+        super.onBackPressed();
+        finish();
+
     }
 
     @Override

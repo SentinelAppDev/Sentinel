@@ -2,12 +2,13 @@ package com.example.myapplication;
 
 public class User {
 
-    private String phone, emailaddress;
+    private String phone, emailaddress, pinstatus;
 
     public User(){
 
         this.phone = "";
         this.emailaddress = "";
+        this.pinstatus = "";
     }
 
     public void setEmailaddress(String femail){
@@ -22,5 +23,12 @@ public class User {
     }
     public String getPhone(){
         return phone;
+    }
+
+    public void setPinstatus(String fpin){
+        this.pinstatus = fpin;
+    }
+    public String getPinstatus(){
+        return pinstatus;
     }
 }
