@@ -10,4 +10,5 @@
     <string name="messagepinold">Enter your 4 digit combination PIN</string>
     <string name="submit">Submit</string>
     <string name="confirm">Confirm</string>
+    <string name="welcome_parent_user">Welcome Parent User</string>
 </resources>

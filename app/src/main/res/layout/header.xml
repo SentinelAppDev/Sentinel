@@ -13,27 +13,21 @@
     <ImageView
         android:layout_width="116dp"
         android:layout_height="99dp"
-        android:src="@drawable/profilee"></ImageView>
+        android:src="@drawable/profilee"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sentinel Project"
         android:textSize="16sp"
-        android:paddingTop="8dp">
-        android:textColor="#ffffff"
+        android:paddingTop="8dp"
+        android:textColor="#ffffff">
 
     </TextView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome Parent User"
+        android:text="@string/welcome_parent_user"
         android:textColor="#ffffff">
 
     </TextView>
-
-
-
-
-
-
 </LinearLayout>
