@@ -44,7 +44,6 @@ public class enterpin extends AppCompatActivity {
     private String email = "", pin = "", cpin = "";
     private Pinview pb;
     private TextView instruction;
-    private Button submitBtn;
 
 
     @SuppressLint("MissingInflatedId")
@@ -55,7 +54,7 @@ public class enterpin extends AppCompatActivity {
         this.getWindow().setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_newpin);
+        setContentView(R.layout.activity_enterpin);
 
         auth = FirebaseAuth.getInstance();
         FirebaseUser users = auth.getCurrentUser();
@@ -68,7 +67,7 @@ public class enterpin extends AppCompatActivity {
 
         pb = (Pinview) findViewById(R.id.oldPinView);
         instruction = (TextView) findViewById(R.id.oldinstruction);
-        submitBtn = (Button) findViewById(R.id.oldpinbtn);
+        Button submitBtn = (Button) findViewById(R.id.oldPinBtn);
         FirebaseApp.initializeApp(enterpin.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Users");

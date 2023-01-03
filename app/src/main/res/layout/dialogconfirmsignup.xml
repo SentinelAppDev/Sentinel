@@ -32,6 +32,18 @@
 
     <TextView
 
+        android:id="@+id/confirmfullname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/antic"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
+
+    <TextView
+
         android:id="@+id/confirmemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

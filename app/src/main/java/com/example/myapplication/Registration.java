@@ -52,7 +52,7 @@ public class Registration extends AppCompatActivity {
     private boolean monitoringConnectivity = false;
     private boolean isConnected = true;
     private ConstraintLayout layout;
-    private EditText phone, email, password, confirm;
+    private EditText phone, email, password, confirm, fullname;
     private Button regBtn;
 
     @SuppressLint("LongLogTag")
@@ -71,6 +71,7 @@ public class Registration extends AppCompatActivity {
         password = findViewById(R.id.Pw1Reg);
         confirm = findViewById(R.id.Pw2Reg);
         regBtn = findViewById(R.id.ReAcbtn);
+        fullname = findViewById(R.id.fullname);
         FirebaseApp.initializeApp(Registration.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -85,15 +86,20 @@ public class Registration extends AppCompatActivity {
                 final String femail = email.getText().toString().trim();
                 final String fpass = password.getText().toString().trim();
                 final String fconf = confirm.getText().toString().trim();
+                final String fname = fullname.getText().toString().trim();
 
-                if (TextUtils.isEmpty(femail) && TextUtils.isEmpty(fphone) && TextUtils.isEmpty(fpass) && TextUtils.isEmpty(fconf)){
+                if (TextUtils.isEmpty(femail) && TextUtils.isEmpty(fname) && TextUtils.isEmpty(fphone) && TextUtils.isEmpty(fpass) && TextUtils.isEmpty(fconf)){
 
                     phone.setError("A mobile number is required.");
                     email.setError("An email address is required.");
                     password.setError("A password is required.");
+                    fullname.setError("Your complete full name is required.");
                 }
                 else if(TextUtils.isEmpty(femail)){
                     email.setError("An email address is required.");
+                }
+                else if(TextUtils.isEmpty(fname)){
+                    email.setError("Your complete full name is required.");
                 }
                 else if(TextUtils.isEmpty(fphone)){
                     phone.setError("A mobile number is required.");
@@ -126,8 +132,10 @@ public class Registration extends AppCompatActivity {
                     View root = getLayoutInflater().inflate((R.layout.dialogconfirmsignup), null);
                     TextView emailadd = root.findViewById(R.id.confirmcontact);
                     TextView phonenumber = root.findViewById(R.id.confirmemail);
+                    TextView fullname = root.findViewById(R.id.confirmfullname);
                     emailadd.setText(femail);
                     phonenumber.setText(fphone);
+                    fullname.setText(fname);
                     builder.setView(root);
                     builder.setPositiveButton("Confirm", (dialogInterface, i) -> auth.createUserWithEmailAndPassword(femail, fpass)
                             .addOnCompleteListener(Registration.this, task -> {
@@ -146,12 +154,14 @@ public class Registration extends AppCompatActivity {
                                         password.setText(null);
                                         confirm.setText(null);
                                         phone.setText(null);
+                                        fullname.setText(null);
 
                                     } else if (task.getException() instanceof FirebaseAuthWeakPasswordException) {
 
                                         Snackbar sn2 = Snackbar.make(layout, "Please input a stronger password", Snackbar.LENGTH_SHORT);
                                         sn2.show();
                                         password.setText(null);
+                                        confirm.setText(null);
 
                                     } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
 
@@ -161,13 +171,14 @@ public class Registration extends AppCompatActivity {
                                         password.setText(null);
                                         confirm.setText(null);
                                         phone.setText(null);
+                                        fullname.setText(null);
 
                                     }
 
 
                                 } else if (task.isSuccessful()) {
 
-                                    createUser(femail, fphone);
+                                    createUser(femail, fphone, fname);
                                     auth.signOut();
                                     Snackbar sn4 = Snackbar.make(layout, "Registration Successful", Snackbar.LENGTH_SHORT);
                                     sn4.show();
@@ -184,6 +195,7 @@ public class Registration extends AppCompatActivity {
                         password.setText(null);
                         confirm.setText(null);
                         phone.setText(null);
+                        fullname.setText(null);
 
                     });
 
@@ -200,12 +212,13 @@ public class Registration extends AppCompatActivity {
 
     }
 
-    private void createUser(String email, String phone){
+    private void createUser(String email, String phone, String name){
 
         User u = new User();
         u.setEmailaddress(email);
         u.setPhone(phone);
         u.setPinstatus("new");
+        u.setFullname(name);
 
         String[] parts = email.split("@");
         databaseReference.child("Users").child(parts[0]).setValue(u)

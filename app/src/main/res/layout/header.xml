@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="180dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="15dp"
@@ -10,23 +10,24 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
-    <ImageView
-        android:layout_width="116dp"
-        android:layout_height="99dp"
-        android:src="@drawable/profilee"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="100dp"
+        android:id="@+id/profilepic"
+        android:layout_height="100dp"
+        app:civ_border_color="@color/Black" />
     <TextView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sentinel Project"
+        android:id="@+id/usersname"
         android:textSize="16sp"
         android:paddingTop="8dp"
         android:textColor="#ffffff">
-
     </TextView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_parent_user"
+        android:id="@+id/usersemail"
         android:textColor="#ffffff">
 
     </TextView>
