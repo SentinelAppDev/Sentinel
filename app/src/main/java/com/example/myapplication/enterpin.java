@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,10 +75,72 @@ public class enterpin extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference().child("Users");
         constraint = (ConstraintLayout) findViewById(R.id.constraintoldpin);
 
+        pb.setPinViewEventListener((pinview, fromUser) -> {
+
+            try{
+
+                hideKeyboard(enterpin.this);
+                pin = pb.getValue();
+                databaseReference.child(email).child("Pin").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        try{
+
+                            cpin = snapshot.getValue(String.class);
+                            if(cpin!=null){
+
+                                if(Objects.equals(cpin, pin)){
+
+                                    Snackbar sn = Snackbar.make(constraint, "Success!, Identity Verified", Snackbar.LENGTH_SHORT);
+                                    sn.show();
+                                    Intent intent = new Intent(enterpin.this, Mainmenu.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+
+                                else{
+
+                                    Snackbar sn = Snackbar.make(constraint, "PIN does not MATCH!", Snackbar.LENGTH_SHORT);
+                                    sn.show();
+                                    Intent intent = new Intent(enterpin.this, enterpin.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+                            else {
+
+                                Snackbar sn = Snackbar.make(constraint, "No PIN was retrieved.", Snackbar.LENGTH_SHORT);
+                                sn.show();
+                            }
+
+                        }
+
+                        catch (Exception e){
+
+                            Log.e("on Enter Pin", e.getMessage(), e);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+            }
+
+            catch(Exception e){
+
+                Log.e("onSubmitPin", e.getMessage(), e);
+            }
+        });
+
         submitBtn.setOnClickListener(view -> {
 
             try{
 
+                hideKeyboard(enterpin.this);
                 pin = pb.getValue();
                 databaseReference.child(email).child("Pin").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -134,6 +198,15 @@ public class enterpin extends AppCompatActivity {
 
         });
 
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     public void onBackPressed(){

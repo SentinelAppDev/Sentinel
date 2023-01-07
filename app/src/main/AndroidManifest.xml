@@ -60,5 +60,6 @@
             android:name=".Registration"
             android:hardwareAccelerated="true"
             android:exported="false" />
+
     </application>
 </manifest>

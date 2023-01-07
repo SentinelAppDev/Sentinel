@@ -49,9 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="328dp"
         android:textColor="@color/BlackGray"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:cursorVisible="true"
+        app:cursorVisible="false"
         app:forceKeyboard="true"
         app:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,6 +58,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:password="true"
         app:pinLength="4"
+        app:pinHeight="40dp"
         app:pinWidth="40dp" />
 
     <com.google.android.material.button.MaterialButton

@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -15,6 +16,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,7 +29,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Mainmenu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Mainmenu extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener,
+        ProfileFragment.OnFragmentInteractionListener{
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth auth;
@@ -38,7 +43,7 @@ public class Mainmenu extends AppCompatActivity implements NavigationView.OnNavi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
-        drawerLayout = findViewById(R.id.Nav_view);
+        drawerLayout = findViewById(R.id.drawer_layout);
         auth = FirebaseAuth.getInstance();
         FirebaseUser users = auth.getCurrentUser();
         if (users != null) {
@@ -46,12 +51,8 @@ public class Mainmenu extends AppCompatActivity implements NavigationView.OnNavi
             useremail = users.getEmail();
 
         }
-        Toolbar toolbar=findViewById(R.id.toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle( this,drawerLayout,toolbar,R.string.navigation_draw_open,R.string.navigation_draw_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.NavigationView);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
         fullname = (TextView) header.findViewById(R.id.usersname);
@@ -59,6 +60,10 @@ public class Mainmenu extends AppCompatActivity implements NavigationView.OnNavi
         imageViewNav = (CircleImageView)header.findViewById(R.id.profilepic);
         String[] app = useremail.split("@");
         getName(app[0]);
+
+        ProfileFragment p = new ProfileFragment();
+        FragmentManager f = getSupportFragmentManager();
+        f.beginTransaction().replace(R.id.mainLayout, p).addToBackStack(null).commit();
 
     }
 
@@ -73,6 +78,14 @@ public class Mainmenu extends AppCompatActivity implements NavigationView.OnNavi
         else {
             getSupportFragmentManager().popBackStack();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -109,7 +122,14 @@ public class Mainmenu extends AppCompatActivity implements NavigationView.OnNavi
             alert.show();
         }
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.Nav_view);
+        else if(id == R.id.Mprfle){
+
+            ProfileFragment p = new ProfileFragment();
+            FragmentManager f = getSupportFragmentManager();
+            f.beginTransaction().replace(R.id.mainLayout, p).addToBackStack(null).commit();
+        }
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -167,5 +187,10 @@ public class Mainmenu extends AppCompatActivity implements NavigationView.OnNavi
     protected void onDestroy() {
 
         super.onDestroy();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

@@ -10,4 +10,7 @@
     <color name="BlackGray">#363434</color>
     <color name="White">#ffffff</color>
     <color name="Black">#282828</color>
+    <color name="lightblue">#04a6f1</color>
+    <color name="darkblue">#2374b5</color>
+    <color name="blue">#258ee4</color>
 </resources>

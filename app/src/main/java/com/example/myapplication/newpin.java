@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -78,7 +80,6 @@ public class newpin extends AppCompatActivity {
                 submitBtn.setVisibility(View.GONE);
                 confBtn.setVisibility(View.VISIBLE);
 
-
             }
 
             catch(Exception e){
@@ -95,6 +96,7 @@ public class newpin extends AppCompatActivity {
                 cpin = pb.getValue();
                 if(Objects.equals(cpin, pin)){
 
+                    hideKeyboard(newpin.this);
                     databaseReference.child(email).child("Pin").setValue(cpin);
                     databaseReference.child(email).child("pinstatus").setValue("old");
                     Snackbar sn = Snackbar.make(constraint, "Registration Successful", Snackbar.LENGTH_SHORT);
@@ -120,6 +122,15 @@ public class newpin extends AppCompatActivity {
 
         });
 
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     public void onBackPressed(){

@@ -11,4 +11,14 @@
     <string name="submit">Submit</string>
     <string name="confirm">Confirm</string>
     <string name="welcome_parent_user">Welcome Parent User</string>
+    <string name="reset_pin">Reset my PIN</string>
+    <string name="replace_picture">Change Picture</string>
+    <string name="my_profile">My Profile</string>
+    <string name="add_child">Add Child</string>
+    <string name="child_location">Child Location</string>
+    <string name="blocking">Blocking</string>
+    <string name="logout">Logout</string>
+    <string name="communicate">Communicate</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="about_us">About Us</string>
 </resources>
