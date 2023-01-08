@@ -16,7 +16,7 @@
         android:layout_marginTop="36dp"
         android:src="@drawable/user"
         app:civ_border_color="@color/Black"
-        app:civ_border_width="3dp"
+        app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,12 +33,13 @@
         android:textColor="#ffffff"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:fontFamily="@font/antic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmentprofilepic" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/fragmentprofileeditname"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -46,6 +47,7 @@
         android:layout_marginStart="15dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:fontFamily="@font/antic"
         android:paddingTop="8dp"
         android:textColor="#ffffff"
         android:textSize="18sp"
@@ -66,6 +68,7 @@
         android:textColor="#ffffff"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:fontFamily="@font/antic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,12 +84,13 @@
         android:textColor="#ffffff"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:fontFamily="@font/antic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmentprofileemailadd" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/fragmentprofileeditcontact"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -97,6 +101,7 @@
         android:paddingTop="8dp"
         android:textColor="#ffffff"
         android:textSize="18sp"
+        android:fontFamily="@font/antic"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
@@ -127,6 +132,7 @@
         android:textColor="#ffffff"
         android:visibility="gone"
         android:textSize="16sp"
+        android:fontFamily="@font/antic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.003"
@@ -144,6 +150,7 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         android:visibility="gone"
+        android:fontFamily="@font/antic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"

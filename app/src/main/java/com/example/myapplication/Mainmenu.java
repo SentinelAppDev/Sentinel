@@ -92,32 +92,23 @@ public class Mainmenu extends AppCompatActivity implements
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
         int id = item.getItemId();
-
         if(id == R.id.Logout){
-
             AlertDialog.Builder builder = new AlertDialog.Builder(Mainmenu.this);
             builder.setTitle("Please confirm action!");
             builder.setMessage("Are you sure you want to Logout?");
             builder.setIcon(R.drawable.sentinel);
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-
                     signOut();
-
                 }
             });
             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-
                     dialogInterface.dismiss();
                     Toast.makeText(getApplicationContext(), "Cancelled!", Toast.LENGTH_SHORT).show();
-
-
                 }
             });
             AlertDialog alert = builder.create();
@@ -125,12 +116,16 @@ public class Mainmenu extends AppCompatActivity implements
         }
 
         else if(id == R.id.Mprfle){
-
             ProfileFragment p = new ProfileFragment();
             FragmentManager f = getSupportFragmentManager();
             f.beginTransaction().replace(R.id.mainLayout, p).addToBackStack(null).commit();
         }
 
+        else if(id == R.id.AdChld){
+            AddChildFragment p = new AddChildFragment();
+            FragmentManager f = getSupportFragmentManager();
+            f.beginTransaction().replace(R.id.mainLayout, p).addToBackStack(null).commit();
+        }
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

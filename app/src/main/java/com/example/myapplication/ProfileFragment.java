@@ -54,12 +54,9 @@ public class ProfileFragment extends Fragment {
     private UploadTask uploadTask;
     private ProgressDialog progressDialog;
 
-    public ProfileFragment() {
-
-    }
+    public ProfileFragment() {}
 
     public static ProfileFragment newInstance(String param1, String param2) {
-
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -75,13 +72,11 @@ public class ProfileFragment extends Fragment {
             String mParam1 = getArguments().getString(ARG_PARAM1);
             String mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 

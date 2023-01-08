@@ -22,4 +22,8 @@
     <string name="contact_us">Contact Us</string>
     <string name="about_us">About Us</string>
     <string name="updateProfPic">Update Profile Picture</string>
+    <string name="fragmentaddchildinstruction">Please input your child\'s name and email address.</string>
+    <string name="child_s_name">Child\'s Name</string>
+    <string name="child_s_email_address">Child\'s Email Address</string>
+    <string name="register">Register</string>
 </resources>
