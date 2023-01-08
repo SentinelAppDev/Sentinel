@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -60,6 +61,7 @@ public class Mainmenu extends AppCompatActivity implements
         imageViewNav = (CircleImageView)header.findViewById(R.id.profilepic);
         String[] app = useremail.split("@");
         getName(app[0]);
+        getProfilePic(app[0]);
 
         ProfileFragment p = new ProfileFragment();
         FragmentManager f = getSupportFragmentManager();
@@ -132,6 +134,25 @@ public class Mainmenu extends AppCompatActivity implements
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void getProfilePic(String email){
+
+        String[] split = email.split("@");
+        DatabaseReference g = FirebaseDatabase.getInstance().getReference().child("Users").child(split[0]).child("ProfilePicture");
+        g.child("imageUrl").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                String url = snapshot.getValue(String.class);
+                Glide.with(Mainmenu.this).load(url).into(imageViewNav);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.err.println("on getProfilePic (ProfileFragment): "+error);
+            }
+        });
     }
 
     public void signOut() {
