@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.myapplication">
+    package="com.pwc.sentinel">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -25,7 +25,7 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".Splash"
+            android:name="com.pwc.sentinel.Splash"
             android:exported="true"
             android:label="Sentinel">
             <intent-filter>
@@ -36,28 +36,28 @@
         </activity>
         <activity
 
-            android:name=".MainActivity"
+            android:name="com.pwc.sentinel.MainActivity"
             android:hardwareAccelerated="true"
             android:exported="false">
 
         </activity>
         <activity
-            android:name=".Mainmenu"
+            android:name="com.pwc.sentinel.Mainmenu"
             android:hardwareAccelerated="true"
             android:exported="false">
 
         </activity>
         <activity
-            android:name=".newpin"
+            android:name="com.pwc.sentinel.newpin"
             android:hardwareAccelerated="true"
             android:exported="false" />
         <activity
-            android:name=".enterpin"
+            android:name="com.pwc.sentinel.enterpin"
             android:hardwareAccelerated="true"
             android:exported="false" />
 
         <activity
-            android:name=".Registration"
+            android:name="com.pwc.sentinel.Registration"
             android:hardwareAccelerated="true"
             android:exported="false" />
 

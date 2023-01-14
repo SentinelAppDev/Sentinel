@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background"
     android:id="@+id/constraintnewpin"
-    tools:context="com.example.myapplication.newpin">
+    tools:context="com.pwc.sentinel.newpin">
 
     <TextView
         android:id="@+id/newinstruction"

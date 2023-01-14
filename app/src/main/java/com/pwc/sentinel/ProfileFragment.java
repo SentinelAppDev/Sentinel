@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.pwc.sentinel;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;

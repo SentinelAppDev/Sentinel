@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.pwc.sentinel;
 
 import android.app.ActivityOptions;
 import android.content.Intent;

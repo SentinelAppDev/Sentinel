@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background"
     android:id="@+id/constraintoldpin"
-    tools:context="com.example.myapplication.enterpin">
+    tools:context="com.pwc.sentinel.enterpin">
 
     <TextView
         android:id="@+id/oldinstruction"
