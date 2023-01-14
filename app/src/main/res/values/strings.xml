@@ -26,4 +26,6 @@
     <string name="child_s_name">Child\'s Name</string>
     <string name="child_s_email_address">Child\'s Email Address</string>
     <string name="register">Register</string>
+    <string name="faddchildtitle">Add Child: Confirm Action</string>
+    <string name="faddchildmsg">Are you sure you want to add this child?</string>
 </resources>

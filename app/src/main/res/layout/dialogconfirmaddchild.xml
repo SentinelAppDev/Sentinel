@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/antic"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="@string/faddchildtitle"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/antic"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:text="@string/faddchildmsg"/>
+
+    <TextView
+
+        android:id="@+id/confirmchildname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/antic"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
+
+    <TextView
+
+        android:id="@+id/confirmchildemail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/antic"
+        android:textSize="20sp"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

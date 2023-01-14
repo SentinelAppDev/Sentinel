@@ -31,7 +31,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Mainmenu extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
-        ProfileFragment.OnFragmentInteractionListener{
+        ProfileFragment.OnFragmentInteractionListener,
+        AddChildFragment.OnFragmentInteractionListener{
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth auth;

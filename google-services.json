@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:152003998193:android:cf7686a12366fbd3f91450",
+        "mobilesdk_app_id": "1:152003998193:android:53b414fee57eac0bf91450",
         "android_client_info": {
-          "package_name": "com.example.myapplication"
+          "package_name": "com.pwc.sentinel"
         }
       },
       "oauth_client": [
