@@ -32,7 +32,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Mainmenu extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
         ProfileFragment.OnFragmentInteractionListener,
-        AddChildFragment.OnFragmentInteractionListener{
+        AddChildFragment.OnFragmentInteractionListener,
+        MapFragment.OnFragmentInteractionListener{
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth auth;
@@ -123,6 +124,11 @@ public class Mainmenu extends AppCompatActivity implements
 
         else if(id == R.id.AdChld){
             AddChildFragment p = new AddChildFragment();
+            FragmentManager f = getSupportFragmentManager();
+            f.beginTransaction().replace(R.id.mainLayout, p).addToBackStack(null).commit();
+        }
+        else if(id == R.id.ChldLoc){
+            MapFragment p = new MapFragment();
             FragmentManager f = getSupportFragmentManager();
             f.beginTransaction().replace(R.id.mainLayout, p).addToBackStack(null).commit();
         }

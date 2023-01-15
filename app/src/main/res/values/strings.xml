@@ -28,4 +28,7 @@
     <string name="register">Register</string>
     <string name="faddchildtitle">Add Child: Confirm Action</string>
     <string name="faddchildmsg">Are you sure you want to add this child?</string>
+    <string name="fragmentmapinstructions">Please select child to set and/or monitor location.</string>
+    <string name="set_child_s_location">Set Child\'s Location</string>
+    <string name="save">Save</string>
 </resources>
