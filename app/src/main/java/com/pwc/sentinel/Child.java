@@ -2,13 +2,14 @@ package com.pwc.sentinel;
 
 public class Child {
 
-    private String name, devicestatus, email;
+    private String name, devicestatus, email, savedLocation;
 
     public Child(){
 
         this.name = "";
         this.devicestatus = "";
         this.email = "";
+        this.savedLocation = "";
     }
 
     public void setName(String fname){
@@ -29,4 +30,9 @@ public class Child {
         this.email = femail;
     }
     public String getEmail(){return email;}
+
+    public void setSavedLocation(String fsavedLocation){
+        this.savedLocation = fsavedLocation;
+    }
+    public String getSavedLocation(){return savedLocation;}
 }

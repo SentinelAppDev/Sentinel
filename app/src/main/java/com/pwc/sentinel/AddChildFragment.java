@@ -177,6 +177,7 @@ public class AddChildFragment extends Fragment {
             c.setName(name);
             c.setDevicestatus("0");
             c.setEmail(email);
+            c.setSavedLocation("0,0");
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference = firebaseDatabase.getReference();
             databaseReference.child("Children").child(pemail).child(name).setValue(c)
