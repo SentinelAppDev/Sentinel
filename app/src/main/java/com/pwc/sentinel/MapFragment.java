@@ -1,13 +1,12 @@
 package com.pwc.sentinel;
 
-import android.annotation.SuppressLint;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,14 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
+import androidx.fragment.app.FragmentTransaction;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
@@ -30,6 +28,8 @@ import com.google.android.gms.maps.MapsInitializer.Renderer;
 import com.google.android.gms.maps.OnMapsSdkInitializedCallback;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -43,15 +43,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -119,7 +115,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, OnMapsS
             try{
                 mCircle.remove();
                 new GetCoordinates().execute(setLoc.getText().toString().replace(" ", "+"));
-                startActivity(new Intent(getActivity(), Mainmenu.class));
+                FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+                ft.detach(MapFragment.this).attach(MapFragment.this).commit();
             }
             catch(Exception e){
                 System.err.println("onClickSave: "+e);
@@ -198,6 +195,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, OnMapsS
     private void moveCamera(LatLng latLng){
         try{
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+            marker = mMap.addMarker(new MarkerOptions().position(latLng).title("Saved Location").icon(bitmapDescriptorFromVector(getActivity(), R.drawable.childicon)));
             drawMarkerWithCircle(latLng);
         }
         catch(Exception e){
@@ -209,7 +207,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, OnMapsS
         try{
             LatLng c = new LatLng(a,b);
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(c, 16));
-            marker = mMap.addMarker(new MarkerOptions().position(c).title(title));
+            marker = mMap.addMarker(new MarkerOptions().position(c).title(title).icon(bitmapDescriptorFromVector(getActivity(), R.drawable.childicon)));
         }
         catch(Exception e){
             Log.e("onMoveCameraTitle", e.getMessage(), e);
@@ -327,10 +325,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, OnMapsS
         });
     }
 
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof ProfileFragment.OnFragmentInteractionListener) {
+        if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
