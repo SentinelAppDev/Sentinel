@@ -195,7 +195,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, OnMapsS
     private void moveCamera(LatLng latLng){
         try{
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
-            marker = mMap.addMarker(new MarkerOptions().position(latLng).title("Saved Location").icon(bitmapDescriptorFromVector(getActivity(), R.drawable.childicon)));
             drawMarkerWithCircle(latLng);
         }
         catch(Exception e){

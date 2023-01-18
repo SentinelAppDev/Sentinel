@@ -32,10 +32,5 @@
     <string name="set_child_s_location">Set Child\'s Location</string>
     <string name="save">Save</string>
     <string name="fragmentdeviceinstructions">Please select child to monitor device.</string>
-    <string-array name="array_name">
-        <item>Array Item One</item>
-        <item>Array Item Two</item>
-        <item>Array Item Three</item>
-    </string-array>
-
+    <string name="please_select_app_to_limit_access">Please select app to limit access</string>
 </resources>

@@ -16,6 +16,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.FirebaseApp;
@@ -127,13 +129,13 @@ public class AddChildFragment extends Fragment {
                                 if(!task.isSuccessful()){
                                     Log.w("Add Child", "signInWithCredential", task.getException());
                                     if(task.getException() instanceof FirebaseAuthUserCollisionException){
-                                        final Snackbar sn = Snackbar.make(layout, "Child has already been added.", Snackbar.LENGTH_INDEFINITE);
+                                        final Snackbar sn = Snackbar.make(layout, "Child has already been added.", Snackbar.LENGTH_SHORT);
                                         sn.show();
                                         childname.setText(null);
                                         childemail.setText(null);
                                     }
                                     else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException){
-                                        final Snackbar sn1 = Snackbar.make(layout, "Please check your email address.", Snackbar.LENGTH_INDEFINITE);
+                                        final Snackbar sn1 = Snackbar.make(layout, "Please check your email address.", Snackbar.LENGTH_SHORT);
                                         sn1.show();
                                         childname.setText(null);
                                         childemail.setText(null);
@@ -154,7 +156,10 @@ public class AddChildFragment extends Fragment {
                                     final Snackbar sn2 = Snackbar.make(layout, "Your child has been successfully added.", Snackbar.LENGTH_INDEFINITE);
                                     sn2.show();
                                     tmpAuth.signOut();
-                                    startActivity(new Intent(getActivity(), Mainmenu.class));
+                                    FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+                                    ft.detach(AddChildFragment.this).attach(AddChildFragment.this).commit();
+                                    childname.setText(null);
+                                    childemail.setText(null);
                                 }
                             });
                 }
@@ -178,6 +183,13 @@ public class AddChildFragment extends Fragment {
             c.setDevicestatus("0");
             c.setEmail(email);
             c.setSavedLocation("0,0");
+            c.setCurrentLocation("0,0");
+            c.setMs("0");
+            c.setFb("0");
+            c.setIg("0");
+            c.setYt("0");
+            c.setTw("0");
+            c.setTk("0");
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference = firebaseDatabase.getReference();
             databaseReference.child("Children").child(pemail).child(name).setValue(c)
