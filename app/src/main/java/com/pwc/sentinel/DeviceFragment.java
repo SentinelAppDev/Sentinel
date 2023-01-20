@@ -99,13 +99,7 @@ public class DeviceFragment extends Fragment {
                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                 TextView tv =(TextView) view;
                                 selectedName = tv.getText().toString();
-                                refreshtest();
-//                                refreshFb();
-//                                refreshIg();
-//                                refreshYt();
-//                                refreshTw();
-//                                refreshTk();
-//                                refreshDevice();
+                                refresh();
                             }
                             @Override
                             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -363,15 +357,15 @@ public class DeviceFragment extends Fragment {
         });
     }
 
-    public void refreshtest(){
+    public void refresh(){
         String[] split = email.split("@");
         try{
             DatabaseReference MsDr = FirebaseDatabase.getInstance().getReference();
-            MsDr.child("Children").child(split[0]).child(selectedName).child("ms").addListenerForSingleValueEvent(new ValueEventListener() {
+            MsDr.child("Children").child(split[0]).child(selectedName).child("ms").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
-                        switch(snapshot.getValue(String.class)){
+                        switch(Objects.requireNonNull(snapshot.getValue(String.class))){
                             case "1":
                                 blckMessenger.setImageResource(R.drawable.lock);
                                 System.out.println("Changing layout to lock");
@@ -395,52 +389,25 @@ public class DeviceFragment extends Fragment {
         catch(Exception e){
             System.err.println("onClickblckMessenger: "+e);
         }
-    }
-
-    public void refresh(){
-        String[] split = email.split("@");
-        String[] b = {""};
-        try{
-            DatabaseReference MsDr = FirebaseDatabase.getInstance().getReference();
-            MsDr.child("Children").child(split[0]).child(selectedName).child("ms").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    try{
-                        b[0] = snapshot.getValue(String.class);
-                    }
-                    catch(Exception e){
-                        System.err.println("onRetrieveMsgrStatus: "+e);
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    System.err.println("DeviceFragment onCancelled blckMessenger onClick: "+error);
-                }
-            });
-            switch(b[0]){
-                case "1":
-                    blckMessenger.setImageResource(R.drawable.lock);
-                    break;
-                case "0":
-                    blckMessenger.setImageResource(R.drawable.messenger);
-                    break;
-            }
-        }
-        catch(Exception e){
-            System.err.println("onClickblckMessenger: "+e);
-        }
+        refreshFb();
     }
 
     public void refreshFb(){
         String[] split = email.split("@");
-        String[] b = {""};
         try{
             DatabaseReference FbDr = FirebaseDatabase.getInstance().getReference();
-            FbDr.child("Children").child(split[0]).child(selectedName).child("fb").addListenerForSingleValueEvent(new ValueEventListener() {
+            FbDr.child("Children").child(split[0]).child(selectedName).child("fb").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
-                        b[0] = snapshot.getValue(String.class);
+                        switch(Objects.requireNonNull(snapshot.getValue(String.class))){
+                            case "1":
+                                blckFacebook.setImageResource(R.drawable.lock);
+                                break;
+                            case "0":
+                                blckFacebook.setImageResource(R.drawable.facebook);
+                                break;
+                        }
                     }
                     catch(Exception e){
                         System.err.println("onRetrieveFbStatus: "+e);
@@ -451,30 +418,29 @@ public class DeviceFragment extends Fragment {
                     System.err.println("DeviceFragment onCancelled blckFacebook onClick: "+error);
                 }
             });
-            switch(b[0]){
-                case "1":
-                    blckFacebook.setImageResource(R.drawable.lock);
-                    break;
-                case "0":
-                    blckFacebook.setImageResource(R.drawable.facebook);
-                    break;
-            }
         }
         catch(Exception e){
             System.err.println("onClickblckFacebook: "+e);
         }
+        refreshIg();
     }
 
     public void refreshIg(){
         String[] split = email.split("@");
-        String[] b = {""};
         try{
             DatabaseReference IgDr = FirebaseDatabase.getInstance().getReference();
-            IgDr.child("Children").child(split[0]).child(selectedName).child("ig").addListenerForSingleValueEvent(new ValueEventListener() {
+            IgDr.child("Children").child(split[0]).child(selectedName).child("ig").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
-                        b[0] = snapshot.getValue(String.class);
+                        switch(Objects.requireNonNull(snapshot.getValue(String.class))){
+                            case "1":
+                                blckInstagram.setImageResource(R.drawable.lock);
+                                break;
+                            case "0":
+                                blckInstagram.setImageResource(R.drawable.instagram);
+                                break;
+                        }
                     }
                     catch(Exception e){
                         System.err.println("onRetrieveIgStatus: "+e);
@@ -485,30 +451,29 @@ public class DeviceFragment extends Fragment {
                     System.err.println("DeviceFragment onCancelled blckInstagram onClick: "+error);
                 }
             });
-            switch(b[0]){
-                case "0":
-                    blckInstagram.setImageResource(R.drawable.lock);
-                    break;
-                case "1":
-                    blckInstagram.setImageResource(R.drawable.instagram);
-                    break;
-            }
         }
         catch(Exception e){
             System.err.println("onClickblckInstagram: "+e);
         }
+        refreshYt();
     }
 
     public void refreshYt(){
         String[] split = email.split("@");
-        String[] b = {""};
         try{
             DatabaseReference YtDr = FirebaseDatabase.getInstance().getReference();
-            YtDr.child("Children").child(split[0]).child(selectedName).child("yt").addListenerForSingleValueEvent(new ValueEventListener() {
+            YtDr.child("Children").child(split[0]).child(selectedName).child("yt").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
-                        b[0] = snapshot.getValue(String.class);
+                        switch(Objects.requireNonNull(snapshot.getValue(String.class))){
+                            case "1":
+                                blckYouTube.setImageResource(R.drawable.lock);
+                                break;
+                            case "0":
+                                blckYouTube.setImageResource(R.drawable.youtube);
+                                break;
+                        }
                     }
                     catch(Exception e){
                         System.err.println("onRetrieveYtStatus: "+e);
@@ -519,30 +484,29 @@ public class DeviceFragment extends Fragment {
                     System.err.println("DeviceFragment onCancelled blckYouTube onClick: "+error);
                 }
             });
-            switch(b[0]){
-                case "0":
-                    blckYouTube.setImageResource(R.drawable.lock);
-                    break;
-                case "1":
-                    blckYouTube.setImageResource(R.drawable.youtube);
-                    break;
-            }
         }
         catch(Exception e){
             System.err.println("onClickblckYoutube: "+e);
         }
+        refreshTw();
     }
 
     public void refreshTw(){
         String[] split = email.split("@");
-        String[] b = {""};
         try{
             DatabaseReference tWdR = FirebaseDatabase.getInstance().getReference();
-            tWdR.child("Children").child(split[0]).child(selectedName).child("tw").addListenerForSingleValueEvent(new ValueEventListener() {
+            tWdR.child("Children").child(split[0]).child(selectedName).child("tw").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
-                        b[0] = snapshot.getValue(String.class);
+                        switch(Objects.requireNonNull(snapshot.getValue(String.class))){
+                            case "1":
+                                blckTwitter.setImageResource(R.drawable.lock);
+                                break;
+                            case "0":
+                                blckTwitter.setImageResource(R.drawable.twitter);
+                                break;
+                        }
                     }
                     catch(Exception e){
                         System.err.println("onRetrieveTwStatus: "+e);
@@ -553,30 +517,29 @@ public class DeviceFragment extends Fragment {
                     System.err.println("DeviceFragment onCancelled blckTwitter onClick: "+error);
                 }
             });
-            switch(b[0]){
-                case "0":
-                    blckTwitter.setImageResource(R.drawable.lock);
-                    break;
-                case "1":
-                    blckTwitter.setImageResource(R.drawable.twitter);
-                    break;
-            }
         }
         catch(Exception e){
             System.err.println("onClickblckTwitter: "+e);
         }
+        refreshTk();
     }
 
     public void refreshTk(){
         String[] split = email.split("@");
-        String[] b = {""};
         try{
             DatabaseReference TkDr = FirebaseDatabase.getInstance().getReference();
-            TkDr.child("Children").child(split[0]).child(selectedName).child("tk").addListenerForSingleValueEvent(new ValueEventListener() {
+            TkDr.child("Children").child(split[0]).child(selectedName).child("tk").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
-                        b[0] = snapshot.getValue(String.class);
+                        switch(Objects.requireNonNull(snapshot.getValue(String.class))){
+                            case "1":
+                                blckTikTok.setImageResource(R.drawable.lock);
+                                break;
+                            case "0":
+                                blckTikTok.setImageResource(R.drawable.tiktok);
+                                break;
+                        }
                     }
                     catch(Exception e){
                         System.err.println("onRetrieveTkStatus: "+e);
@@ -587,30 +550,29 @@ public class DeviceFragment extends Fragment {
                     System.err.println("DeviceFragment onCancelled blckTikTok onClick: "+error);
                 }
             });
-            switch(b[0]){
-                case "0":
-                    blckTikTok.setImageResource(R.drawable.lock);
-                    break;
-                case "1":
-                    blckTikTok.setImageResource(R.drawable.tiktok);
-                    break;
-            }
         }
         catch(Exception e){
             System.err.println("onClickblckTiktok: "+e);
         }
+        refreshDevice();
     }
 
     public void refreshDevice(){
         String[] split = email.split("@");
-        String[] b = {""};
         try{
             DatabaseReference dev = FirebaseDatabase.getInstance().getReference();
-            dev.child("Children").child(split[0]).child(selectedName).child("devicestatus").addListenerForSingleValueEvent(new ValueEventListener() {
+            dev.child("Children").child(split[0]).child(selectedName).child("devicestatus").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try{
-                        b[0] = snapshot.getValue(String.class);
+                        switch(Objects.requireNonNull(snapshot.getValue(String.class))){
+                            case "1":
+                                blckDevice.setImageResource(R.drawable.lock);
+                                break;
+                            case "0":
+                                blckDevice.setImageResource(R.drawable.ic_baseline_lock_24);
+                                break;
+                        }
                     }
                     catch(Exception e){
                         System.err.println("onRetrieveDeviceStatus: "+e);
@@ -621,14 +583,6 @@ public class DeviceFragment extends Fragment {
                     System.err.println("DeviceFragment onCancelled blckDevice onClick: "+error);
                 }
             });
-            switch(b[0]){
-                case "0":
-                    blckDevice.setImageResource(R.drawable.lock);
-                    break;
-                case "1":
-                    blckDevice.setImageResource(R.drawable.ic_baseline_lock_24);
-                    break;
-            }
         }
         catch(Exception e){
             System.err.println("onClickblckDevice: "+e);
