@@ -216,6 +216,10 @@ public class AddChildFragment extends Fragment {
             FirebaseDatabase df = FirebaseDatabase.getInstance();
             DatabaseReference rd = df.getReference();
             rd.child("ChildrenParent").child(split[0]).setValue(pemail);
+
+            FirebaseDatabase fg = FirebaseDatabase.getInstance();
+            DatabaseReference tf = fg.getReference();
+            tf.child("ChildName").child(split[0]).setValue(name);
         }
         catch(Exception e){
             System.err.println("on createParentChildData: "+e);

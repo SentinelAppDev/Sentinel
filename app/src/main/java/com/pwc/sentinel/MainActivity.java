@@ -52,12 +52,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if(!CheckGpsStatus()){
-
-            buildAlertMessageNoGps();
-        }
-
         SentinelService services = new SentinelService(this);
         Intent mServiceIntent = new Intent(MainActivity.this, SentinelService.class);
         mServiceIntent.setAction(SentinelService.ACTION_STOP_FOREGROUND_SERVICE);
@@ -222,30 +216,6 @@ public class MainActivity extends AppCompatActivity {
 
         super.onPause();
 
-    }
-
-    public boolean CheckGpsStatus() {
-
-        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-
-        boolean GpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-        return GpsStatus;
-    }
-
-    private void buildAlertMessageNoGps() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Your GPS seems to be disabled, please enable it to proceed.")
-                .setCancelable(false)
-                .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, final int id) {
-
-                        Intent i = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        startActivity(i);
-                    }
-                });
-        final AlertDialog alert = builder.create();
-        alert.show();
     }
 
     private final ConnectivityManager.NetworkCallback connectivityCallback

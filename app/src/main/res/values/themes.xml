@@ -12,6 +12,4 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >@color/lightblue</item>
     </style>
-
-
 </resources>
