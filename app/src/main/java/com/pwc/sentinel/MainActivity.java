@@ -2,6 +2,7 @@ package com.pwc.sentinel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.app.ActivityManager;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     boolean isConnected = true;
     private boolean monitoringConnectivity = false;
-    private RelativeLayout layout;
+    private ConstraintLayout layout;
     private FirebaseAuth auth;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;

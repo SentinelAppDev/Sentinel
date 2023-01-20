@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">SentinelParent</string>
     <string name="sentinel">Sentinel</string>
     <string name="parent_control_app">Parental Control Application</string>
     <string name="navigation_draw_open">Open Vavigation Drawer</string>
@@ -33,4 +33,9 @@
     <string name="save">Save</string>
     <string name="fragmentdeviceinstructions">Please select child to monitor device.</string>
     <string name="please_select_app_to_limit_access">Please select app to limit access</string>
+    <string name="emailhint">Email</string>
+    <string name="passwordhint">Password</string>
+    <string name="btnLogin">Login</string>
+    <string name="createAccntHint">Don\'t have an Account? Sign up now!</string>
+    <string name="signupHint">Sign-up here</string>
 </resources>
