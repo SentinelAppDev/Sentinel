@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.pwc.sentinel">
 
+    <uses-feature android:name="android.hardware.location.gps" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,8 +14,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-feature android:name="android.hardware.location.gps" />
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -26,7 +25,7 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name="com.pwc.sentinel.Splash"
+            android:name=".Splash"
             android:exported="true"
             android:label="Sentinel">
             <intent-filter>
@@ -36,32 +35,46 @@
             </intent-filter>
         </activity>
         <activity
-
-            android:name="com.pwc.sentinel.MainActivity"
-            android:hardwareAccelerated="true"
-            android:exported="false">
-
-        </activity>
+            android:name=".MainActivity"
+            android:exported="false"
+            android:hardwareAccelerated="true" />
         <activity
-            android:name="com.pwc.sentinel.Mainmenu"
-            android:hardwareAccelerated="true"
-            android:exported="false">
-
-        </activity>
+            android:name=".Mainmenu"
+            android:exported="false"
+            android:hardwareAccelerated="true" />
         <activity
-            android:name="com.pwc.sentinel.newpin"
-            android:hardwareAccelerated="true"
-            android:exported="false" />
+            android:name=".newpin"
+            android:exported="false"
+            android:hardwareAccelerated="true" />
         <activity
-            android:name="com.pwc.sentinel.enterpin"
-            android:hardwareAccelerated="true"
-            android:exported="false" />
-
+            android:name=".enterpin"
+            android:exported="false"
+            android:hardwareAccelerated="true" />
         <activity
-            android:name="com.pwc.sentinel.Registration"
-            android:hardwareAccelerated="true"
-            android:exported="false" />
-
+            android:name=".Registration"
+            android:exported="false"
+            android:hardwareAccelerated="true" />
+        <service
+            android:name=".SentinelService"
+            android:enabled="true"
+            android:stopWithTask="false"/>
+        <receiver
+            android:name=".SentinelReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartSensor"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="RestartSensor"
+                    android:enabled="true"
+                    android:exported="true"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${mapsApiKey}" />

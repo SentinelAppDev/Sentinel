@@ -2,6 +2,9 @@ package com.pwc.sentinel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -54,9 +57,14 @@ public class MainActivity extends AppCompatActivity {
             buildAlertMessageNoGps();
         }
 
+        SentinelService services = new SentinelService(this);
+        Intent mServiceIntent = new Intent(MainActivity.this, SentinelService.class);
+        mServiceIntent.setAction(SentinelService.ACTION_STOP_FOREGROUND_SERVICE);
+        if (isMyServiceRunning(services.getClass()))
+            ContextCompat.startForegroundService(this, mServiceIntent);
+
         auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser() != null){
-
             startActivity(new Intent(MainActivity.this, enterpin.class));
             finish();
         }
@@ -174,6 +182,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void onBackPressed(){
 
         super.onBackPressed();
@@ -267,14 +285,11 @@ public class MainActivity extends AppCompatActivity {
             monitoringConnectivity = true;
         }
         else {
-
             connectivityManager.registerNetworkCallback(
                     new NetworkRequest.Builder()
                             .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
                             .build(), connectivityCallback);
             monitoringConnectivity = true;
-
         }
-
     }
 }
